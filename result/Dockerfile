@@ -5,6 +5,9 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends curl tini && \
     # How do you know curl is required?-----> You should have communication with the DEV team.
     rm -rf /var/lib/apt/lists/*
+    # This step above is to reduce the image size.
+    #It is commonly used in Dockerfiles to reduce the image size by removing package lists 
+    # that are no longer needed after installing software.
 
 WORKDIR /usr/local/app
 
