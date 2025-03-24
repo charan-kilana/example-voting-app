@@ -24,9 +24,13 @@ RUN npm ci && \
  mv /usr/local/app/node_modules /node_modules
 
 COPY . .
+#Copy all files to workdir
 
 ENV PORT=80
 EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
+#This tells Tini to pass all arguments to the your application before starting server.js.
+
 CMD ["node", "server.js"]
+#Start the application file that starts the server.
