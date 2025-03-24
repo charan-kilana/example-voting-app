@@ -4,13 +4,22 @@ FROM python:3.11-slim AS base
 # Add curl for healthcheck
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
+
+    # What is tini??-----> tini is used to Properly Handle Signals like SIGTERM
+    # How do you know curl is required?-----> You should have communication with the DEV team.
+    
     rm -rf /var/lib/apt/lists/*
+    # This step above is to reduce the image size.
+    #It is commonly used in Dockerfiles to reduce the image size by removing package lists 
+    # that are no longer needed after installing software.
 
 # Set the application directory
 WORKDIR /usr/local/app
 
 # Install our requirements.txt
 COPY requirements.txt ./requirements.txt
+#copies all dependencies to root directory.
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # dev defines a stage for development, where it'll watch for filesystem changes
