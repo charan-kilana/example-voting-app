@@ -3,6 +3,7 @@ FROM node:18-slim
 # add curl for healthcheck
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl tini && \
+    
     # What is tini??-----> tini is used to Properly Handle Signals like SIGTERM
     # How do you know curl is required?-----> You should have communication with the DEV team.
     
